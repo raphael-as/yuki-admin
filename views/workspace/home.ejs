@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceuil - <%= OrgName %></title>
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="panel__side">
+      <div id="nav">
+        <div class="channel__content">
+          <i onclick="nav()" id="iv" class="fas fa-bars"></i>
+        </div>
+      </div>
+      <div id="user">
+        <div class="channel__content">
+          <img src="<%= user.pfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
+        </div>
+      </div>
+      <div id="org">
+        <a href="mailto:hi@daniellenall.com"><div class="channel__content">
+          <img src="<%= OrgLogo %>" height="75px" width="75px" style="border-radius: 50%; margin-top: 10px;">
+          </div></a>
+    </div>
+    <div id="logout">
+      <div class="channel__content">
+        <a href="logout">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB6klEQVR4nO2asUoDMRjHP9BRcFJ07eDQQWq+6yQoPkRfwNGXcHXQrYiJ9AXc3Bx0sQjW4qKC+Ail0nxqF3GoXHstR7Ha1uQu13w/OCgHvSS/u/wvuQSAYRiGYRiGYcYCFVVRUSfhowqugMk3vnuAK2CsUkLpLyFpL4nywBWw33hJRzEZh6WzzpzN8sAVMFahQOpdlPqze07qC5StRZvlOQEOVQhP3zdR6UbvqdAvRfW2ZrO81MEfKhRUKCckPUW58IpS79gsL1VwRIXy5caCUHRuOhwzIyAkDEIh6WAQjpLk9n5nHnwR0MdkOGZSQMjGSWsLlW5G4VgD3wT0w/G/Dci0gBBbAsKuJZS+Wz/+WJ722tkWoPRtNCJ9TFQCJixgFIXK+xIqeuhdXz+jbK+CTwJSk4CGBAilb8xPm3XdeINtCbDzYSVDAmx0gWK5vQK+CCik0XjHXoN1L16DOHIgRFfhENvbgVBqIAsgfgKQuwBxBoClzDD9f+MgZwBxBiBnAHEGBBXKTZMZ0051wRWE1LVoBtYMP30nIkDSNbhCfsIlMOfuoAlKEyyBzaSASZbAZlrAOPsDZl7AX/sDvBDwWzh6IyAWjoPNU/Hf4BNBPBx9FDAcjl4KiO0PuEdFl90TDMMwDMMwDAOu8A278m31UzmJBwAAAABJRU5ErkJggg==">
+      </a>
+      </div>
+</div>
+</div>
+    <div class="panel__main">
+      <div class="panel__main-side">
+        <ul id="navlinks" class="list__links">
+          
+          <a href="#home"><li class="navlink active"><i class="fas fa-home"></i> &nbsp;  Acceuil</li></a>
+          <a href="#about"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
+          <a href="#projects"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
+          <a href="/agenda"><li class="navlink"><i class="fas fa-address-book"></i> &nbsp; Agenda</li></a>
+        <a href="#contact"><li class="navlink"><i class="fas fa-address-book"></i> &nbsp; Email</li></a>
+        </ul>
+      
+      </div>
+      <script></script>
+      <div class="panel__main-content">
+        <section id="home">
+          <center>
+          <div id="bvn-home">
+              <img id="time-icon" src="">
+              <h1 id="bvn"><span id=bvn2>Bienvenue, </span><%= user.name %> !</h1>    
+              <blockquote class="quotes">
+               <span id="q-content">Roads? Where we're going, we don't need... roads.</span> 
+               <cite id="q-author">Dr. Emmett Brown</cite>
+             </blockquote>
+          </div>
+        </center>
+        </section>
+        
+
+          </div>
+        </div>
+      </div>
+
+      <script src="./workspace/utils/js/nav.js"></script>
+      <script src="./workspace/utils/js/home.js"></script>
+</body>
+</html>

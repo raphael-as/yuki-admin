@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Login - <%= OrgName %></title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./workspace/utils/css/login.css">
+
+</head>
+<body class="align">
+
+  <div class="grid align__item">
+
+    <div class="register">
+
+      <img class="logo" src="<%= OrgLogo %>">
+
+      <h2>Connexion</h2> <h4><%= OrgName %></h4>
+
+      <form action="" method="post" class="form">
+
+        <div class="form__field">
+          <input type="email" id="email" name="email" placeholder="email@entreprise.com" required>
+        </div>
+
+        <div class="form__field">
+          <input type="password" id="password" name="password" placeholder="••••••••••••" required>
+        </div>
+
+        <div class="form__field">
+          <input type="submit" value="Se Connecter">
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>

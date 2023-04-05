@@ -1,0 +1,20 @@
+@media only screen and (max-width: 600px) {
+    #iv {
+        margin-top: 10px;
+        margin-left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 40px;
+        display:flex;
+      }
+      .panel__main .panel__main-side {
+        background: #2c2f33;
+        height: 100vh;
+        height: 0px;
+        width: 0px;
+    }
+      
+      .panel_main-content {
+        width: 100%;
+      }
+}

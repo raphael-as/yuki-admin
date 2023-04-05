@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Agenda</title>
+  </head>
+  <body>
+    <h1>Agenda</h1>
+
+    <ul>
+      <% events.forEach(event => { %>
+        <li>
+          <h3><%= event.title %></h3>
+          <p>Start date: <%= event.start.toLocaleDateString('fr-FR') %></p>
+          <p>End date: <%= event.end.toLocaleDateString('fr-FR') %></p>
+        </li>
+      <% }); %>
+    </ul>
+
+    <a href="/events/new">Create a new event</a>
+  </body>
+</html>

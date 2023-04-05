@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Nouvel événement</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Nouvel événement</h1>
+		<form action="/events" method="POST">
+			<div class="form-group">
+				<label for="title">Titre</label>
+				<input type="text" class="form-control" id="title" name="title" required>
+			</div>
+			<div class="form-group">
+				<label for="start">Date de début</label>
+				<input type="datetime-local" class="form-control" id="start" name="start" required>
+			</div>
+			<div class="form-group">
+				<label for="end">Date de fin</label>
+				<input type="datetime-local" class="form-control" id="end" name="end" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Ajouter</button>
+		</form>
+		<a href="/events">Retour</a>
+	</div>
+</body>
+</html>
