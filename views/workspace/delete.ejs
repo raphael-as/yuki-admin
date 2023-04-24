@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email- <%= OrgName %></title>
+    <title>Supression Compte - <%= OrgName %></title>
     <link rel="icon" type="image/png" href="<%= OrgLogo %>">
-    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/email.css">
-    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
-    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../workspace/utils/css/org.css">
+    <link rel="stylesheet" type="text/css" href="../workspace/utils/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../workspace/utils/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -21,12 +21,16 @@
           <i onclick="nav()" id="iv" class="fas fa-bars"></i>
         </div>
       </div>
-      <a href="/user">  <div id="user">
+      <div id="user">
         <div class="channel__content">
           <img src="<%= UserPfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
         </div>
-      </div></a>
-      <%- divorg %>
+      </div>
+      <div id="org">
+        <a href="/org"><div class="channel__content">
+          <img src="<%= OrgLogo %>" height="75px" width="75px" style="border-radius: 50%; margin-top: 10px;">
+          </div></a>
+    </div>
     <div id="logout">
       <div class="channel__content">
         <a href="logout">
@@ -43,42 +47,27 @@
           <a href="/chat"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
           <a href="/voc"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
           <a href="/agenda"><li class="navlink"><i class="fas fa-book"></i> &nbsp; Agenda (<%= eventsCount %>) </li></a>
-        <a href="#"><li class="navlink active"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
+        <a href="#contact"><li class="navlink"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
         </ul>
       
       </div>
-      <script></script>
       <div class="panel__main-content">
         <section id="home">
-        <h1>Paramètre Utilisateur</h1>
-        
+       <h1>Supprimer l'utilisateur <%= user %></h1>
+       
 <div class="grid align__item">
     <div class="register">
-<form action="/email" method="POST" class="form">
-        
-       <div class="form__field">
-    <label for="bio">Email :</label>
-    <input type="email" id="email" name="email"  required>
-        </div>
-        
-        
-        <div class="form__field">
-    <label for="bio">Sujet :</label>
-    <input type="text" id="sujet" name="sujet" autocomplete="off"" required>
-        </div>
-
-        <div class="form__field">
-    <label for="bio">Message :</label>
-    <textarea id="message" name="message" autocomplete="off" required></textarea>
-        </div>
-
-        <div class="form__field">
-          <input type="submit" value="Envoyer le mail">
-        </div>
-
-      </form>
-    </div>
+<form method="POST">
+  <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.</p>
+  <p>Pour confirmer la suppression, écrivez "SUPPRIMER" en majuscules :</p>
+  <div class="form__field">
+  <input type="text" name="confirmation">
   </div>
+  <div class="form__field">
+  <input type="submit" value="Supprimer">
+  </div>
+</form>
+
         </section>
         
 

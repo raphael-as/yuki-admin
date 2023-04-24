@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email- <%= OrgName %></title>
+    <title>Paramètre Utilisateur - <%= OrgName %></title>
     <link rel="icon" type="image/png" href="<%= OrgLogo %>">
-    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/email.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/user.css">
     <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
     <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -21,12 +21,12 @@
           <i onclick="nav()" id="iv" class="fas fa-bars"></i>
         </div>
       </div>
-      <a href="/user">  <div id="user">
+     <a href="/user">  <div id="user">
         <div class="channel__content">
           <img src="<%= UserPfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
         </div>
-      </div></a>
-      <%- divorg %>
+      </div> </a>
+     <%- divorg %>
     <div id="logout">
       <div class="channel__content">
         <a href="logout">
@@ -43,7 +43,7 @@
           <a href="/chat"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
           <a href="/voc"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
           <a href="/agenda"><li class="navlink"><i class="fas fa-book"></i> &nbsp; Agenda (<%= eventsCount %>) </li></a>
-        <a href="#"><li class="navlink active"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
+        <a href="/email"><li class="navlink"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
         </ul>
       
       </div>
@@ -54,26 +54,48 @@
         
 <div class="grid align__item">
     <div class="register">
-<form action="/email" method="POST" class="form">
+<form action="/user" method="POST" class="form">
+
+  <div class="form__field">
+   <center> <img src="<%= UserBanner %>" style="max-height: 300px; max-width: 500px;"></center>
+    <label for="photo">Bnniere :</label>
+    <input type="url" id="banner" name="banner" value="<%= UserBanner %>">
+        </div>
+        
+   <div class="form__field">
+    <img src="<%= UserPfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px">
+    <label for="pfp">Photo de profil :</label>
+    <input type="url" id="pfp" name="pfp" value="<%= UserPfp %>" required>
+        </div>
         
        <div class="form__field">
-    <label for="bio">Email :</label>
-    <input type="email" id="email" name="email"  required>
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" value="<%= UserName %>" required>
         </div>
         
         
         <div class="form__field">
-    <label for="bio">Sujet :</label>
-    <input type="text" id="sujet" name="sujet" autocomplete="off"" required>
+        <label for="email">Adresse e-mail :</label>
+          <input type="email" id="email" name="email" placeholder="email@entreprise.com" value="<%= UserEmail %>" required>
         </div>
 
         <div class="form__field">
-    <label for="bio">Message :</label>
-    <textarea id="message" name="message" autocomplete="off" required></textarea>
+    <label for="bio">Bio :</label>
+    <input type="text" id="bio" name="bio" value="<%= UserBio %>" required>
+        </div>
+        
+        <div class="form__field">
+         <label for="mdp">Nouveau mot de passe :</label>
+          <input type="password" id="nmdp" name="nmdp" placeholder="••••••••••••">
+        </div>
+        
+        <div class="form__field">
+         <label for="nmdp">Mot de passe :</label>
+          <input type="password" id="mdp" name="mdp" placeholder="••••••••••••" required>
         </div>
 
         <div class="form__field">
-          <input type="submit" value="Envoyer le mail">
+          <input type="submit" value="Enregistrer les modifications">
         </div>
 
       </form>

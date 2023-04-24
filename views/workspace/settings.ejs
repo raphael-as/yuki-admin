@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètre Organisation - <%= OrgName %></title>
+    <link rel="icon" type="image/png" href="<%= OrgLogo %>">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/org.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body onload="msg()">
+
+  <div class="wrapper">
+    <div class="panel__side">
+      <div id="nav">
+        <div class="channel__content">
+          <i onclick="nav()" id="iv" class="fas fa-bars"></i>
+        </div>
+      </div>
+     <a href="/user">  <div id="user">
+        <div class="channel__content">
+          <img src="<%= UserPfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
+        </div>
+      </div> </a>
+      <div id="org">
+        <a href="/org"><div class="channel__content">
+          <img src="<%= OrgLogo %>" height="75px" width="75px" style="border-radius: 50%; margin-top: 10px;">
+          </div></a>
+    </div>
+    <div id="logout">
+      <div class="channel__content">
+        <a href="logout">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB6klEQVR4nO2asUoDMRjHP9BRcFJ07eDQQWq+6yQoPkRfwNGXcHXQrYiJ9AXc3Bx0sQjW4qKC+Ail0nxqF3GoXHstR7Ha1uQu13w/OCgHvSS/u/wvuQSAYRiGYRiGYcYCFVVRUSfhowqugMk3vnuAK2CsUkLpLyFpL4nywBWw33hJRzEZh6WzzpzN8sAVMFahQOpdlPqze07qC5StRZvlOQEOVQhP3zdR6UbvqdAvRfW2ZrO81MEfKhRUKCckPUW58IpS79gsL1VwRIXy5caCUHRuOhwzIyAkDEIh6WAQjpLk9n5nHnwR0MdkOGZSQMjGSWsLlW5G4VgD3wT0w/G/Dci0gBBbAsKuJZS+Wz/+WJ722tkWoPRtNCJ9TFQCJixgFIXK+xIqeuhdXz+jbK+CTwJSk4CGBAilb8xPm3XdeINtCbDzYSVDAmx0gWK5vQK+CCik0XjHXoN1L16DOHIgRFfhENvbgVBqIAsgfgKQuwBxBoClzDD9f+MgZwBxBiBnAHEGBBXKTZMZ0051wRWE1LVoBtYMP30nIkDSNbhCfsIlMOfuoAlKEyyBzaSASZbAZlrAOPsDZl7AX/sDvBDwWzh6IyAWjoPNU/Hf4BNBPBx9FDAcjl4KiO0PuEdFl90TDMMwDMMwDAOu8A278m31UzmJBwAAAABJRU5ErkJggg==">
+      </a>
+      </div>
+</div>
+</div>
+    <div class="panel__main">
+      <div class="panel__main-side">
+        <ul id="navlinks" class="list__links">
+          
+          <a href="/"><li class="navlink"><i class="fas fa-home"></i> &nbsp;  Accueil</li></a>
+          <a href="/chat"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
+          <a href="/voc"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
+          <a href="/agenda"><li class="navlink"><i class="fas fa-book"></i> &nbsp; Agenda (<%= eventsCount %>) </li></a>
+        <a href="/email"><li class="navlink"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
+        </ul>
+      
+      </div>
+      <script></script>
+      <div class="panel__main-content">
+        <section id="home">
+        <h1>Paramètre Utilisateur</h1>
+        
+<div class="grid align__item">
+    <div class="register">
+<form action="/org" method="POST" class="form">
+        
+   <div class="form__field">
+    <img src="<%= OrgLogo %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px">
+    <label for="logo">Logo :</label>
+    <input type="url" id="logo" name="logo" value="<%= OrgLogo %>" required>
+        </div>
+        
+       <div class="form__field">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" value="<%= OrgName %>" required>
+        </div>
+        
+        
+        <div class="form__field">
+        <label for="email">Adresse e-mail :</label>
+          <input type="email" id="email" name="email" placeholder="email@entreprise.com" value="<%= OrgEmail %>" required>
+        </div>
+
+        <div class="form__field">
+    <label for="bio">Email Host :</label>
+    <input type="text" id="host" name="host" value="<%= OrgHost %>" placeholder="smtp.example.com" required>
+        </div>
+        
+	 <div class="form__field">
+    <label for="bio">Email Port :</label>
+    <input type="text" id="port" name="port" value="<%= OrgPort %>" placeholder="587" required>
+        </div>
+	
+        <div class="form__field">
+    <label for="bio">Mot de passe Email :</label>
+    <input type="text" id="mdp" name="mdp" placeholder="••••••••••••" value="<%= OrgMdp %>" required>
+        </div>
+
+        <div class="form__field">
+          <input type="submit" value="Enregistrer les modifications">
+        </div>
+
+      </form>
+    </div>
+  </div>
+  
+    <center>
+  <h2>Liste des utilisateurs</h2>
+  
+  <div class="list-wrapper">
+  <ul class="list">
+  <% users.forEach(user => { %>
+    <li class="list-item">
+      <div>
+        <img src="<%= user.pfp %>" class="list-item-image">
+      </div>
+      <div class="list-item-content">
+       <a href="/profile/<%= user.name %>"><h4><%= user.name %></h4></a>
+        <p><%= user.email %></p>
+        <p><%= user.role %></p>
+        <p>Admin : <%= user.admin %></p>
+        <% if (user.name !== sessionUser) { %>
+          <form method="POST" action="/delete/<%= user.name %>/">
+            <input type="hidden" name="userId" value="<%= user.name %>">
+            <button type="submit">Supprimer</button>
+          </form>
+        <% } %>
+      </div>
+    </li>
+    <% }); %>
+   </ul>
+</div>
+
+
+
+<h2>Nouveau Utilsateur</h2>
+<div class="grid align__item">
+    <div class="register">
+<form method="post" action="/new-user">
+      <div class="form__field">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" name="username" id="username" required>
+      </div>
+
+<div class="form__field">
+<label for="email">Email :</label>
+<input type="email" name="email" id="email" required>
+</div>
+
+      <div class="form__field">
+        <label for="password">Mot de passe :</label>
+        <input type="password" name="password" id="password" required>
+</div>
+
+<div class="form__field">
+<label for="post">Son poste:</label>
+<select id="post" name="post" size="4"  required>
+<option value="Fondateur">Fondateur</option>
+<option value="Technicien">Technicien</option>
+<option value="Développeur">Développeur</option>
+<option value="Community Manager">Community Manager</option>
+<option value="Graphiste">Graphiste</option>
+<option value="Trésorier">Trésorier</option>
+<option value="Stagiaire">Stagiaire</option>
+<option value="Support Client">Support Client</option>
+</select>
+</div>
+
+<div class="form__field">
+<label for="perm">Permission administrateur :</label>
+<select id="perm" name="perm" size="3"  required>
+<option value="false">Non</option>
+<option value="true">Oui</option>
+</select>
+      </div>
+
+      <div class="form__field">
+       <input type="submit" value="Enregistrer les modifications">
+      </div>
+    </form>
+    </div>
+    </div>
+  </center>
+        </section>
+        
+
+          </div>
+        </div>
+      </div>
+      <script src="./workspace/utils/js/nav.js"></script>
+</body>
+</html>

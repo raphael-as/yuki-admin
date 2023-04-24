@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil - <%= OrgName %></title>
+    <title>Accueil - <%= OrgName %></title>
+    <link rel="icon" type="image/png" href="<%= OrgLogo %>">
     <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
     <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>
+<body onload="msg()">
+
   <div class="wrapper">
     <div class="panel__side">
       <div id="nav">
@@ -18,16 +20,12 @@
           <i onclick="nav()" id="iv" class="fas fa-bars"></i>
         </div>
       </div>
-      <div id="user">
+    <a href="/user">  <div id="user">
         <div class="channel__content">
-          <img src="<%= user.pfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
+          <img src="<%= userpfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
         </div>
-      </div>
-      <div id="org">
-        <a href="mailto:hi@daniellenall.com"><div class="channel__content">
-          <img src="<%= OrgLogo %>" height="75px" width="75px" style="border-radius: 50%; margin-top: 10px;">
-          </div></a>
-    </div>
+      </div> </a>
+     <%- divorg %>
     <div id="logout">
       <div class="channel__content">
         <a href="logout">
@@ -40,11 +38,11 @@
       <div class="panel__main-side">
         <ul id="navlinks" class="list__links">
           
-          <a href="#home"><li class="navlink active"><i class="fas fa-home"></i> &nbsp;  Acceuil</li></a>
-          <a href="#about"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
-          <a href="#projects"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
-          <a href="/agenda"><li class="navlink"><i class="fas fa-address-book"></i> &nbsp; Agenda</li></a>
-        <a href="#contact"><li class="navlink"><i class="fas fa-address-book"></i> &nbsp; Email</li></a>
+          <a href="/"><li class="navlink active"><i class="fas fa-home"></i> &nbsp;  Accueil</li></a>
+          <a href="/chat"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
+          <a href="/voc"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
+          <a href="/agenda"><li class="navlink"><i class="fas fa-book"></i> &nbsp; Agenda (<%= eventsCount %>) </li></a>
+        <a href="/email"><li class="navlink"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
         </ul>
       
       </div>
@@ -54,7 +52,7 @@
           <center>
           <div id="bvn-home">
               <img id="time-icon" src="">
-              <h1 id="bvn"><span id=bvn2>Bienvenue, </span><%= user.name %> !</h1>    
+              <h1 id="bvn"><span id=bvn2>Bienvenue, </span><%= username %> !</h1>    
               <blockquote class="quotes">
                <span id="q-content">Roads? Where we're going, we don't need... roads.</span> 
                <cite id="q-author">Dr. Emmett Brown</cite>
@@ -67,7 +65,20 @@
           </div>
         </div>
       </div>
+      <script>
+        function msg() {
+      // Vérifie si la synthèse vocale est disponible
+      if ('speechSynthesis' in window) {
+        // Crée un message vocal
+        const message = new SpeechSynthesisUtterance('Bienvenue sur notre site !');
 
+        // Enregistre le message vocal pour une utilisation ultérieure
+        window.message = message;
+      } else {
+        alert("La synthèse vocale n'est pas disponible sur votre navigateur.");
+      }
+    }
+</script>
       <script src="./workspace/utils/js/nav.js"></script>
       <script src="./workspace/utils/js/home.js"></script>
 </body>

@@ -1,0 +1,76 @@
+
+  .msger-inputarea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 10px;
+    background: #23272a;
+  }
+  
+  .msger-inputarea * {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+  
+  .msger-input {
+    flex: 1;
+    background: #2c2f33;
+  }
+  
+  .msger-send-btn {
+    margin-left: 10px;
+    background: #006ee6;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.23s;
+  }
+  
+  .msger-send-btn:hover {
+    background: #0062cc;
+  }
+  
+  .message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .message-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .bubble {
+    background-color: #494f52;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%;
+    color: #fff;
+  }
+  
+  .bubble p {
+    margin: 0;
+  }
+
+  #messages {
+    max-height: 500px; /* Hauteur maximale */
+    overflow: auto; /* Ajouter une barre de défilement en cas de besoin */
+  }

@@ -6,7 +6,7 @@ const qa = document.getElementById("q-author");
 
 if (hour >= 6 && hour < 12) {
   bvn.innerHTML = "Bonne matinée, " 
-  time.src = '../workspace/img/cup-coffee.gif';
+  time.src = '../workspace/utils/img/cup-coffee.gif';
 } else if (hour >= 12 && hour < 18) {
   bvn.innerHTML = "Bonne journée, ";
   time.src = "../workspace/utils/img/sub-sun.gif";

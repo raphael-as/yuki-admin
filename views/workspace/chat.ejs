@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion - <%= OrgName %></title>
+    <link rel="icon" type="image/png" href="<%= OrgLogo %>">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/message.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body onload="scrollToBottom(messages);">
+  <div class="wrapper">
+    <div class="panel__side">
+      <div id="nav">
+        <div class="channel__content">
+          <i onclick="nav()" id="iv" class="fas fa-bars"></i>
+        </div>
+      </div>
+      <a href="/user"> <div id="user">
+        <div class="channel__content">
+          <img src="<%= userpfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
+        </div>
+      </div> </a>
+    <%- divorg %>
+    <div id="logout">
+      <div class="channel__content">
+        <a href="logout">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB6klEQVR4nO2asUoDMRjHP9BRcFJ07eDQQWq+6yQoPkRfwNGXcHXQrYiJ9AXc3Bx0sQjW4qKC+Ail0nxqF3GoXHstR7Ha1uQu13w/OCgHvSS/u/wvuQSAYRiGYRiGYcYCFVVRUSfhowqugMk3vnuAK2CsUkLpLyFpL4nywBWw33hJRzEZh6WzzpzN8sAVMFahQOpdlPqze07qC5StRZvlOQEOVQhP3zdR6UbvqdAvRfW2ZrO81MEfKhRUKCckPUW58IpS79gsL1VwRIXy5caCUHRuOhwzIyAkDEIh6WAQjpLk9n5nHnwR0MdkOGZSQMjGSWsLlW5G4VgD3wT0w/G/Dci0gBBbAsKuJZS+Wz/+WJ722tkWoPRtNCJ9TFQCJixgFIXK+xIqeuhdXz+jbK+CTwJSk4CGBAilb8xPm3XdeINtCbDzYSVDAmx0gWK5vQK+CCik0XjHXoN1L16DOHIgRFfhENvbgVBqIAsgfgKQuwBxBoClzDD9f+MgZwBxBiBnAHEGBBXKTZMZ0051wRWE1LVoBtYMP30nIkDSNbhCfsIlMOfuoAlKEyyBzaSASZbAZlrAOPsDZl7AX/sDvBDwWzh6IyAWjoPNU/Hf4BNBPBx9FDAcjl4KiO0PuEdFl90TDMMwDMMwDAOu8A278m31UzmJBwAAAABJRU5ErkJggg==">
+      </a>
+      </div>
+</div>
+</div>
+    <div class="panel__main">
+      <div class="panel__main-side">
+        <ul id="navlinks" class="list__links">
+          
+          <a href="/"><li class="navlink"><i class="fas fa-home"></i> &nbsp;  Accueil</li></a>
+          <a href="#"><li class="navlink active"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
+          <a href="/voc"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
+          <a href="/agenda"><li class="navlink"><i class="fas fa-book"></i> &nbsp; Agenda (<%= eventsCount %>)</li></a>
+        <a href="/email"><li class="navlink"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
+        </ul>
+      
+      </div>
+      
+      <div class="panel__main-content">
+        <section id="home">
+          <div id="messages">
+     <% let currentDate = ''; %>
+  <% msgs.forEach(msg => { %>
+    <% const msgDate = msg.date.toDateString(); %>
+    <% if (msgDate !== currentDate) { %>
+      <% if (currentDate !== '') { %>
+        </div>
+      <% } %>
+      <% if (msgDate === new Date().toDateString()) { %>
+        <div class="ag-today-container">
+          <p>Aujourd'hui</p>
+      <% } else { %>
+        <div class="ag-day-container">
+          <p><%= msg.date.toLocaleDateString() %></p>
+      <% } %>
+      <% currentDate = msgDate; %>
+    <% } %>
+    <div class="message">
+      <img class="profile-pic" src="<%= msg.pfp %>" alt="Photo de profil">
+      <div class="message-content">
+       <a href="/profile/<%= msg.user %>"> <span class="username"><%= msg.user %></span> </a>
+        <div class="bubble">
+          <p><%- msg.txt %></p>
+        </div>
+      </div>
+    </div>
+  <% }); %>
+          </div>
+          <div class="msger">
+            <form id="form" action="" class="msger-inputarea">
+              <input id="input" type="text" name="text" autocomplete="off"  class="msger-input" placeholder="Votre message...">
+              <button id="send-btn" type="submit" class="msger-send-btn">Envoyer</button>
+            </form>
+          </div>
+        </section>
+      </div>
+      
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+        var socket = io();
+  
+        var messages = document.getElementById("messages");
+var form = document.getElementById("form");
+var input = document.getElementById("input");
+
+if ('Notification' in window) {
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      // L'autorisation a été accordée
+    }
+  });
+}
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  if (input.value) {
+    socket.emit("chat message", `<div class="message">
+  <img class="profile-pic" src="<%= userpfp %>" alt="Photo de profil">
+  <div class="message-content">
+    <a href="/profile/<%= username %>"> <span class="username"><%= username %></span> </a>
+    <div class="bubble">
+      <p>${input.value}</p>
+    </div>
+  </div>
+</div>
+`, input.value);
+    input.value = "";
+  }
+});
+
+socket.on("chat message", function (msg) {
+  var item = document.createElement("div");
+  item.innerHTML = msg;
+  messages.appendChild(item);
+  scrollToBottom(messages);
+});
+function scrollToBottom(element) {
+  element.scrollTop = element.scrollHeight;
+}
+input.addEventListener("keydown", function(e) {
+  if (e.keyCode === 13 && e.shiftKey) {
+    var start = this.selectionStart;
+    var end = this.selectionEnd;
+    this.value = this.value.substring(0, start) + " <br> " + this.value.substring(end);
+    this.selectionStart = this.selectionEnd = start + 6;
+    e.preventDefault();
+  } else if (e.keyCode === 13) {
+    this.value += "\n";
+    e.preventDefault();
+  }
+});
+
+      </script>
+      <script src="./workspace/utils/js/nav.js"></script>
+      <script src="./workspace/utils/js/chat.js"></script>
+</body>
+</html>

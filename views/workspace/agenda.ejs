@@ -1,22 +1,141 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Agenda</title>
-  </head>
-  <body>
-    <h1>Agenda</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - <%= OrgName %></title>
+    <link rel="icon" type="image/png" href="<%= OrgLogo %>">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/agenda.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./workspace/utils/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="panel__side">
+      <div id="nav">
+        <div class="channel__content">
+          <i onclick="nav()" id="iv" class="fas fa-bars"></i>
+        </div>
+      </div>
+      <a href="/user">  <div id="user">
+        <div class="channel__content">
+          <img src="<%= userpfp %>" height="75px" width="75px" style="border-radius: 50%; margin-top:10px;">
+        </div>
+      </div> </a>
+      <%- divorg %>
+    <div id="logout">
+      <div class="channel__content">
+        <a href="logout">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB6klEQVR4nO2asUoDMRjHP9BRcFJ07eDQQWq+6yQoPkRfwNGXcHXQrYiJ9AXc3Bx0sQjW4qKC+Ail0nxqF3GoXHstR7Ha1uQu13w/OCgHvSS/u/wvuQSAYRiGYRiGYcYCFVVRUSfhowqugMk3vnuAK2CsUkLpLyFpL4nywBWw33hJRzEZh6WzzpzN8sAVMFahQOpdlPqze07qC5StRZvlOQEOVQhP3zdR6UbvqdAvRfW2ZrO81MEfKhRUKCckPUW58IpS79gsL1VwRIXy5caCUHRuOhwzIyAkDEIh6WAQjpLk9n5nHnwR0MdkOGZSQMjGSWsLlW5G4VgD3wT0w/G/Dci0gBBbAsKuJZS+Wz/+WJ722tkWoPRtNCJ9TFQCJixgFIXK+xIqeuhdXz+jbK+CTwJSk4CGBAilb8xPm3XdeINtCbDzYSVDAmx0gWK5vQK+CCik0XjHXoN1L16DOHIgRFfhENvbgVBqIAsgfgKQuwBxBoClzDD9f+MgZwBxBiBnAHEGBBXKTZMZ0051wRWE1LVoBtYMP30nIkDSNbhCfsIlMOfuoAlKEyyBzaSASZbAZlrAOPsDZl7AX/sDvBDwWzh6IyAWjoPNU/Hf4BNBPBx9FDAcjl4KiO0PuEdFl90TDMMwDMMwDAOu8A278m31UzmJBwAAAABJRU5ErkJggg==">
+      </a>
+      </div>
+</div>
+</div>
+    <div class="panel__main">
+      <div class="panel__main-side">
+        <ul id="navlinks" class="list__links">
+          
+          <a href="/"><li class="navlink"><i class="fas fa-home"></i> &nbsp;  Accueil</li></a>
+          <a href="/chat"><li class="navlink"><i class="far fa-id-card"></i>  &nbsp; Discussion</li></a>
+          <a href="/voc"><li class="navlink"><i class="fas fa-laptop-code"></i> &nbsp; Vocal</li></a>
+          <a href="#"><li class="navlink active"><i class="fas fa-book"></i> &nbsp; Agenda (<%= eventsCount %>)</li></a>
+        <a href="/email"><li class="navlink"><i class="fas fa-pen"></i> &nbsp; Email</li></a>
+        </ul>
+      
+      </div>
+      
+      <div class="panel__main-content">
+        <section id="home">
+          <center>
+          <h1 id="notif">test</h1>
+        </center>
+          <script>
+            const notif = document.getElementById("notif");
+            const eventsCount = parseInt("<%= eventsCount %>");
+            if (eventsCount === 0) {
+             notif.innerHTML = "Aucun événement de prévu";
+              } else {
+               notif.innerHTML = "";
+              }
+          </script>
+<button class="open-button" onclick="openForm()">Ajouter un evenement</button>
+<div id="agenda"></div>
+<div class="ag-format-container">
+  <% let currentDate = ''; %>
+  <% events.forEach(event => { %>
+    <% const eventDate = event.start.toDateString(); %>
+    <% if (eventDate !== currentDate) { %>
+      <% if (currentDate !== '') { %>
+        </div>
+      <% } %>
+      <% if (eventDate === new Date().toDateString()) { %>
+        <div class="ag-today-container">
+          <h1>Aujourd'hui</h1>
+      <% } else { %>
+        <div class="ag-day-container">
+          <h1><%= event.start.toLocaleDateString() %></h1>
+      <% } %>
+      <% currentDate = eventDate; %>
+    <% } %>
+    <div class="ag-courses_box">
+      <div class="ag-courses_item">
+        <a href="#" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+          <div class="ag-courses-item_title">
+            <%= event.title %>
+          </div>
+          <div class="ag-courses-item_date-box">
+            Début:
+            <span class="ag-courses-item_date">
+              <%= event.start.toLocaleDateString() %> - <%= event.start.toLocaleTimeString() %>
+            </span> <br>
+            Fin:
+            <span class="ag-courses-item_date">
+              <%= event.end.toLocaleDateString() %> - <%= event.end.toLocaleTimeString() %>
+            </span>
+          </div>
+        </a>
+      </div>  
+    </div>
+  <% }); %>
+  </div>
+</div>
 
-    <ul>
-      <% events.forEach(event => { %>
-        <li>
-          <h3><%= event.title %></h3>
-          <p>Start date: <%= event.start.toLocaleDateString('fr-FR') %></p>
-          <p>End date: <%= event.end.toLocaleDateString('fr-FR') %></p>
-        </li>
-      <% }); %>
-    </ul>
+<div class="form-popup" id="myForm">
+  <form action="/events" method="post" class="form-container">
+    <h1>Événement</h1>
 
-    <a href="/events/new">Create a new event</a>
-  </body>
+    <label for="title">Titre</label>
+				<input type="text" class="form-control" id="title" name="title" required>
+
+				<label for="start" class="start">Date de Début</label>
+				<input type="datetime-local" class="form-control" id="start" name="start" required>
+
+
+    <label for="end" class="end">Date de fin</label>
+				<input type="datetime-local" class="form-control" id="end" name="end" required>
+
+    <button type="submit" class="btn">Enregister</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Fermer</button>
+  </form>
+</div>
+
+        </section>
+        
+
+          </div>
+          <script>
+            function openForm() {
+              document.getElementById("myForm").style.display = "block";
+            }
+            
+            function closeForm() {
+              document.getElementById("myForm").style.display = "none";
+            }
+            </script>
+      <script src="./workspace/utils/js/nav.js"></script>
+</body>
 </html>
